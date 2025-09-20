@@ -1,0 +1,21 @@
+[build]
+  # The default publish directory points at the built React app. The functions
+  # directory is where Netlify will look for serverless functions (in our case
+  # the Express API wrapper at netlify/functions/api.js). The build command
+  # installs the client dependencies and produces the production build in
+  # client/dist via the script defined in the root package.json.
+  publish = "client/dist"
+  functions = "netlify/functions"
+  command = "npm run build"
+
+#[dev]
+#  When developing locally with the Netlify CLI, you can run the server on a
+#  separate port. Uncomment the lines below if using `netlify dev`.
+#command = "npm --prefix server run dev"
+#targetPort = 8080
+#port = 8888
+
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/api/:splat"
+  status = 200
